@@ -15,6 +15,7 @@
           <input type="text" placeholder="Last Name" name="last_name" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
           <input type="email" name="email" placeholder="Email Address" class="w-[100%] mt-3 border-red border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
           <!-- code for Phone number and country code -->
+          <PhoneInput/>
           <input type="password" name="password" id="" placeholder="Password" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
           <div class="text-[12px] text-[#404555] ">Password must be at least 8 characters</div>
           <div class="text-[12px] mt-4">By clicking Sign Up you are indicating that you have read and acknowledged the <NuxtLink href="#" class="c text-[#2558E5]">Terms of Service</NuxtLink> and <NuxtLink href="#" class="c text-[#2558E5]">Privacy Notice</NuxtLink></div>
