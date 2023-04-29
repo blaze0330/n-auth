@@ -15,5 +15,8 @@
   },
   "dependencies": {
     "vue-phone-number-input": "^1.12.13"
+  },
+  "resolutions": {
+    "@nuxt/kit": "3.0.0-rc.12"
   }
 }
