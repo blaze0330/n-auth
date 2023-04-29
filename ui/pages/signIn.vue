@@ -1,8 +1,9 @@
 <template>
-  <div class="flex w-screen h-full">
+  <div class="flex-col items-center md:flex md:flex-row md:w-full md:h-full ">
+    <img src="./../assets/Logo-mobile.svg" class="block mt-10 md:hidden w-[150px] h-[42px] m-auto" />
     <WelcomeBanner />
-    <div class="flex align-middle items-center basis-[60vw] bg-[#FFFFFF]">
-      <div class="m-auto w-[35%] flex-col">
+    <div class="mt-9 md:flex md:align-middle md:items-center md:basis-[60vw] bg-[#FFFFFF]">
+      <div class="m-auto w-[384px] flex-col">
         <div class="font-bold text-2xl">
         Sign In to WisdomCircle
         </div>
@@ -18,8 +19,10 @@
             <img v-if="isHidden" src="./../assets/ShowPassword.svg" v-on:click="setIsHidden(isHidden)" class="absolute right-[10px] top-[30px]" />
             <img v-else src="./../assets/HidePassword.svg" v-on:click="setIsHidden(isHidden)" class="absolute right-[11px] top-[25px]"/>
           </div>
-          
-          <button type="submit" class="bg-[#F1C12B] font-semibold text-[18px] h-[48px] w-[100%] rounded-[5px] mt-6">Sign In</button>
+          <div class="relative w-full h-8 text-center items-center flex">
+            <NuxtLink to="/forgotPassword" class="text-[#2558E5] font-semibold absolute right-0">Forgot password</NuxtLink>
+          </div>
+          <button type="submit" class="mt-[200px] bg-[#F1C12B] font-semibold text-[18px] h-[48px] w-[100%] rounded-[5px] md:mt-6">Sign In</button>
         </form>
       </div>
     </div>

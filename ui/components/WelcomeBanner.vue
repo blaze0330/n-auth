@@ -1,8 +1,8 @@
 <template>
-  <div class="hidden md:flex bg-[#404555] basis-[40vw] text-[#FFFFFF] lg:pb-[20px] xl:pb-[50px]">
+  <div class="hidden md:flex md:bg-[#404555] md:basis-[40vw] text-[#FFFFFF] lg:pb-[20px] xl:pb-[50px]">
     <!-- Left part of the welcome banner the one with the avatar. -->
-    <div class="h-full basis-[30%] flex flex-col-reverse">
-      <img class="w-[165px] h-[219px] mb-0" src="./../assets/Avatar.svg" />
+    <div class="w-full basis-[30%] flex flex-col justify-end">
+      <img class="w-[165px] h-[219px]" src="./../assets/Avatar.svg" />
     </div>
     <!-- Right part of the welcome banner. The one with logo. -->
     <div class="basis-[70%] flex-col justify-around">
