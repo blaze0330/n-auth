@@ -1,5 +1,5 @@
 <template>
-  <div class="hidden md:flex bg-[#404555] basis-[40vw] text-[#FFFFFF]">
+  <div class="hidden md:flex bg-[#404555] basis-[40vw] text-[#FFFFFF] lg:pb-[20px] xl:pb-[50px]">
     <!-- Left part of the welcome banner the one with the avatar. -->
     <div class="h-full basis-[30%] flex flex-col-reverse">
       <img class="w-[165px] h-[219px] mb-0" src="./../assets/Avatar.svg" />
