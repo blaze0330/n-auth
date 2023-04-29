@@ -13,11 +13,11 @@ import {ConfigModule, ConfigService} from '@nestjs/config';
         envFilePath: ".env.local",
       }
       )],
-      useFactory: (configService: ConfigService) => ({
+      useFactory: (configService: ConfigService) => ({        
         type: 'postgres',
         host: configService.get('host'),
         port: +configService.get('port'),
-        username: configService.get('username'),
+        username: configService.get('postgres'), // username wasn't working for some reason so had to hardcode this one.
         password: configService.get('password'),
         database: configService.get('database'),
         synchronize: configService.get<boolean>('sync'),
