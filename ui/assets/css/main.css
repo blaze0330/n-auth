@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* css reset */
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  height: 100%;
+}
+
+/* other styling */
+
+
+body {
+  font-family: 'Poppins';
+}
