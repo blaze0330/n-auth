@@ -7,18 +7,6 @@ export class AppService {
   }
   getUsers() {
     return [
-      {
-        email: 'tusharsharma2440160@gmail.com',
-        password: 'password'
-      },
-      {
-        email: 'tusharsharma160@gmail.com',
-        password: 'password'
-      },
-      {
-        email: 'tusharsharma2460@gmail.com',
-        password: 'password'
-      },
     ]
   }
 }

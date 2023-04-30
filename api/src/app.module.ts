@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {ConfigModule, ConfigService} from '@nestjs/config';
+import { UserModule } from './user/user.module';
 // import "reflect-metadata";
 
 @Module({
@@ -17,13 +18,16 @@ import {ConfigModule, ConfigService} from '@nestjs/config';
         type: 'postgres',
         host: configService.get('host'),
         port: +configService.get('port'),
-        username: configService.get('postgres'), // username wasn't working for some reason so had to hardcode this one.
+        username: 'postgres', // accessing using .env.local doesn't work
         password: configService.get('password'),
         database: configService.get('database'),
-        synchronize: configService.get<boolean>('sync'),
+        synchronize: true,
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        logging: true
       }),
       inject: [ConfigService],
-    })
+    }),
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService],
