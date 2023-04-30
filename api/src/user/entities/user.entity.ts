@@ -27,4 +27,7 @@ export class User {
   @Column()
   password_salt: string;
 
+  @Column()
+  email_verified: boolean;
+
 }
