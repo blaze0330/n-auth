@@ -21,8 +21,8 @@ export class UserService {
     user.email = createUserDto.email;
     user.dialing_code = createUserDto.dialing_code;
     user.phone_number = createUserDto.phone_number;
-    user.password_hash = createUserDto.password_hash;
-    user.password_salt = createUserDto.password_salt;
+    user.password = createUserDto.password;
+    // user.password_salt = createUserDto.password_salt;
 
     return this.userRepository.save(user);
   }
