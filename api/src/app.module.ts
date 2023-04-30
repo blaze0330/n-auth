@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {ConfigModule, ConfigService} from '@nestjs/config';
 import { UserModule } from './user/user.module';
+import { User } from './user/entities/user.entity';
 // import "reflect-metadata";
 
 @Module({
@@ -27,6 +28,7 @@ import { UserModule } from './user/user.module';
       }),
       inject: [ConfigService],
     }),
+    TypeOrmModule.forFeature([User]),
     UserModule
   ],
   controllers: [AppController],

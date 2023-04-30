@@ -15,7 +15,7 @@ export class UserService {
   // this will be used for registering a new user.
 
   create(createUserDto: CreateUserDto): Promise<User> {
-    let user: User = new User();
+    const user: User = new User();
     user.first_name = createUserDto.first_name;
     user.last_name = createUserDto.last_name;
     user.email = createUserDto.email;
