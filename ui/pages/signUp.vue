@@ -16,7 +16,10 @@
           <input type="text" placeholder="Last Name" name="last_name" v-model="form.last_name" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
           <input type="email" name="email" v-model="form.email" placeholder="Email Address" class="w-[100%] mt-3 border-red border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
           <!-- code for Phone number and country code -->
-          <PhoneInput/>
+          <PhoneInput 
+            @phone="handlePhone"
+            @dialing-code="handleDialingCode"
+          />
           <!-- code for password and showPassword eye -->
           <div class="flex relative w-full">
             <input v-if="isHidden" type="password" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500" placeholder="Password" name="password" v-model="form.password" />
@@ -46,7 +49,9 @@
               dialing_code: '',
               phone_number: '',
               password: '',
-            }
+            },
+            phone: '',
+            dialingCode: ''
         };
     },
     methods: (
@@ -57,8 +62,16 @@
         },
         async submitForm() {
           const data = await this.$axios.$post('/http://localhost:3001/user', {
-            'first_name': ''
+            'first_name': '',
           })
+        },
+        handlePhone(value) {
+          this.phone = value;
+          console.log(this.phone);
+        },
+        handleDialingCode(value) {
+          this.dialingCode = value;
+          console.log(this.dialingCode)
         }
       }
     )
