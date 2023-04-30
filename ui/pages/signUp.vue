@@ -11,16 +11,16 @@
           <span class="font-normal text-base">Already have an account? </span>
           <NuxtLink to="signIn" class="text-[#2558E5] font-semibold">Sign In</NuxtLink>
         </div>
-        <form action="" method="post" class="flex flex-col items-start mt-5">
-          <input type="text" placeholder="First Name" name="first_name" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
-          <input type="text" placeholder="Last Name" name="last_name" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
-          <input type="email" name="email" placeholder="Email Address" class="w-[100%] mt-3 border-red border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
+        <form action="" method="post" class="flex flex-col items-start mt-5" @submit.prevent="submitForm">
+          <input type="text" placeholder="First Name" name="first_name" v-model="form.first_name" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
+          <input type="text" placeholder="Last Name" name="last_name" v-model="form.last_name" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
+          <input type="email" name="email" v-model="form.email" placeholder="Email Address" class="w-[100%] mt-3 border-red border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
           <!-- code for Phone number and country code -->
           <PhoneInput/>
           <!-- code for password and showPassword eye -->
           <div class="flex relative w-full">
-            <input v-if="isHidden" type="password" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500" placeholder="Password" name="password" v-model="password" />
-            <input v-else type="text" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500" placeholder="Password" name="password" v-model="password" />
+            <input v-if="isHidden" type="password" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500" placeholder="Password" name="password" v-model="form.password" />
+            <input v-else type="text" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500" placeholder="Password" name="password" v-model="form.password" />
             <img v-if="isHidden" src="./../assets/ShowPassword.svg" v-on:click="setIsHidden(isHidden)" class="absolute right-[10px] top-[30px]" />
             <img v-else src="./../assets/HidePassword.svg" v-on:click="setIsHidden(isHidden)" class="absolute right-[11px] top-[25px]"/>
           </div>
@@ -38,7 +38,15 @@
     data() {
       return {
             users: [],
-            isHidden: true
+            isHidden: true,
+            form: {
+              first_name: '',
+              last_name: '',
+              email: '',
+              dialing_code: '',
+              phone_number: '',
+              password: '',
+            }
         };
     },
     methods: (
@@ -46,6 +54,11 @@
         setIsHidden(isHidden) {
           console.log(isHidden);
           this.isHidden = !isHidden;
+        },
+        async submitForm() {
+          const data = await this.$axios.$post('/http://localhost:3001/user', {
+            'first_name': ''
+          })
         }
       }
     )
