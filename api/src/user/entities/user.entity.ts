@@ -28,6 +28,9 @@ export class User extends BaseEntity{
   @Column({default: false})
   email_verified: boolean;
 
+  @Column({nullable: false})
+  verification_code: string;
+
   @BeforeInsert()
   async hasPassword() {
     this.password = await bcrypt.hash(this.password, 8);

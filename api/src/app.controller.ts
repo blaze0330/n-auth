@@ -3,10 +3,14 @@ import { AppService } from './app.service';
 import { SignInDto } from './dto/sign-in.dto';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { User } from './user/entities/user.entity';
+import { VerifyUserDto } from './dto/verify-user.dto';
+import { ResendMailDto } from './dto/resend-mail.dto';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor
+  (private readonly appService: AppService,
+    ) {}
 
   @Get()
   getHello(): string {
@@ -46,15 +50,40 @@ export class AppController {
     user.dialing_code = dialing_code;
     user.phone_number = phone_number;
     user.password = password;
-    try {
-      const savedUser = await user.save();
-      // console.log(savedUser);
-      return {succes: true}
+    try { // first save then generate a token as it may fail in rare ocassions
+      const token = await this.appService.generateToken(user); // generate token and save user
+      const email = user.email;
+      await this.appService.sendVerificationMail(email, token);
+      
+      return {succes: "Mail was sent!"}
     } catch (error) {
       console.log(error);
-      return {success: false};
+      return {success: "Unable to send the verification mail"};
     }
     // console.log("UserCreate");
+  }
+
+  @Post('verify-email') 
+  async verify(@Body() body: VerifyUserDto) {
+    const {token, email} = body;
+    console.log("token: ", token);
+    console.log("email: ", email);
+    const verificationCode = await this.appService.findVerificationCodeByEmail(email);
+    if (verificationCode === token) {
+      await this.appService.verifyUser(email);
+      return {success: true}
+    } else {
+      console.log("Unable to verify user. Wrong verification code!!");
+      return {success: false}
+    }
+  }
+
+  @Post('resend-verification-code')
+  async resendMail(@Body() body: ResendMailDto) {
+    const email = body.email;
+    const user = await this.appService.findUserByEmailOrPhone(email); // find the user for which we have to change the code
+    const newToken = await this.appService.generateToken(user); // generate new code for that user
+    this.appService.sendVerificationMail(email, newToken);
   }
 
 }
