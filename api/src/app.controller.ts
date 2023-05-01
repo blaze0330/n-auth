@@ -29,6 +29,9 @@ export class AppController {
     if (!user) {
       console.log("User with the credentials doesn't exist")
       return {success: false};
+    } else if (!user.email_verified) {
+      console.log("User is not verified");
+      return {success: false};
     }
     const validPwd = await user.validatePassword(password).then((op) => op);
     if (user && validPwd) {
@@ -55,10 +58,10 @@ export class AppController {
       const email = user.email;
       await this.appService.sendVerificationMail(email, token);
       
-      return {succes: "Mail was sent!"}
+      return {success: true}
     } catch (error) {
       console.log(error);
-      return {success: "Unable to send the verification mail"};
+      return {success: false};
     }
     // console.log("UserCreate");
   }
