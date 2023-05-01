@@ -15,7 +15,6 @@ export class AppService {
     ]
   }
   async findUserByEmailOrPhone(phoneOrEmail: string) {
-    console.log("Yes this place was reached!! ", phoneOrEmail);
     const user = await this.userRepository.findOne({
       where: [
         { phone_number: phoneOrEmail },
