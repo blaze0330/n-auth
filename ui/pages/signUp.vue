@@ -11,7 +11,7 @@
           <span class="font-normal text-base">Already have an account? </span>
           <NuxtLink to="signIn" class="text-[#2558E5] font-semibold">Sign In</NuxtLink>
         </div>
-        <form action="" method="post" class="flex flex-col items-start mt-5" @submit.prevent="submitForm">
+        <form class="flex flex-col items-start mt-5" @submit.prevent="submitForm">
           <input type="text" placeholder="First Name" name="first_name" v-model="form.first_name" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
           <input type="text" placeholder="Last Name" name="last_name" v-model="form.last_name" class="w-[100%] mt-3 border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
           <input type="email" name="email" v-model="form.email" placeholder="Email Address" class="w-[100%] mt-3 border-red border-[#DCDEE5] border-[1px] bg-[#FFFFFF] h-[48px] rounded-[4px] px-[12px] py-[16px] focus:outline-slate-500">
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+  import axios from 'axios';
+
   export default({
     data() {
       return {
@@ -46,32 +48,35 @@
               first_name: '',
               last_name: '',
               email: '',
-              dialing_code: '',
+              dialing_code: '+93', // default is AF
               phone_number: '',
               password: '',
             },
-            phone: '',
-            dialingCode: ''
         };
     },
-    methods: (
-      {
-        setIsHidden(isHidden) {
+    methods: ({
+      setIsHidden(isHidden) {
           console.log(isHidden);
           this.isHidden = !isHidden;
         },
         async submitForm() {
-          const data = await this.$axios.$post('/http://localhost:3001/user', {
-            'first_name': '',
-          })
+          console.log("Onsubmit was called")
+          try {
+            const response = await axios.post('http://localhost:3001/register', {
+              formData: this.form
+            }) 
+            console.log("response => ", response.data);
+          } catch (error) {
+            console.log(error);
+          }
         },
         handlePhone(value) {
-          this.phone = value;
-          console.log(this.phone);
+          this.form.phone_number = value;
+          // console.log(this.phone);
         },
         handleDialingCode(value) {
-          this.dialingCode = value;
-          console.log(this.dialingCode)
+          this.form.dialing_code = value;
+          // console.log(this.dialingCode)
         }
       }
     )

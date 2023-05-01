@@ -1,6 +1,8 @@
 import { Controller, Post, Body, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { SignInDto } from './sign-in.dto';
+import { SignInDto } from './dto/sign-in.dto';
+import { RegisterUserDto } from './dto/register-user.dto';
+import { User } from './user/entities/user.entity';
 
 @Controller()
 export class AppController {
@@ -19,24 +21,40 @@ export class AppController {
   @Post('signIn')
   async signIn(@Body() body: SignInDto) {
     const {phoneOrEmail, password} = body;
-    console.log(body);
-    console.log(phoneOrEmail);
-
     const user = await this.appService.findUserByEmailOrPhone(phoneOrEmail);
-    console.log("This place was reached!!! ");
     if (!user) {
-      console.log("failed to find user")
+      console.log("User with the credentials doesn't exist")
       return {success: false};
     }
     const validPwd = await user.validatePassword(password).then((op) => op);
-    console.log(user);
-    console.log(validPwd);
     if (user && validPwd) {
       return {success: true};
     } else {
-      console.log("failed to find user")
       return {success: false};
     }
+  }
+
+  @Post('register')
+  async register(@Body() body: RegisterUserDto) {
+    const {first_name, last_name, email, dialing_code, phone_number, password} = Object.values(body)[0];
+    // console.log("body => ", body);
+    // console.log("password => ", password);
+    const user = new User();
+    user.first_name = first_name;
+    user.last_name = last_name;
+    user.email = email;
+    user.dialing_code = dialing_code;
+    user.phone_number = phone_number;
+    user.password = password;
+    try {
+      const savedUser = await user.save();
+      // console.log(savedUser);
+      return {succes: true}
+    } catch (error) {
+      console.log(error);
+      return {success: false};
+    }
+    // console.log("UserCreate");
   }
 
 }
