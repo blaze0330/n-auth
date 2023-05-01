@@ -65,7 +65,13 @@
             const response = await axios.post('http://localhost:3001/register', {
               formData: this.form
             }) 
-            console.log("response => ", response.data);
+            console.log(response);
+            if (response.data.success) {
+              this.$router.push('/signIn');
+            } else {
+              console.log("Some error occurred");
+            }
+            // console.log("response => ", response.data);
           } catch (error) {
             console.log(error);
           }
