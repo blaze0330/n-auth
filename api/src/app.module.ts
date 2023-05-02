@@ -15,7 +15,7 @@ import { MailerModule, MailerService } from '@nestjs-modules/mailer';
         host: 'smtp.sendgrid.net',
         auth: {
           user: 'apikey', 
-          pass: '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'
+          pass: 'password'
         }
       }
     }),
