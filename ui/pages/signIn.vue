@@ -1,6 +1,6 @@
 <template>
   <EmailVerificationPopup :show="showPopUp" :email="$route.query.email" @close="showPopUp=false" />
-  <div class="flex-col items-center h-[100vh] pt-10 md:flex md:flex-row md:w-full md:h-full">
+  <div class="flex-col items-center h-[100vh] pt-10 md:pt-0 md:flex md:flex-row md:w-full md:h-full">
     <img src="./../assets/Logo-mobile.svg" class="block md:hidden w-[150px] h-[42px] m-auto" />
     <WelcomeBanner />
     <div class="mt-9 md:flex md:align-middle md:items-center md:basis-[60vw] bg-[#FFFFFF]">
@@ -62,10 +62,10 @@ export default {
               const response = await axios.post("http://localhost:3001/signIn", {
               phoneOrEmail: this.inputValue, password: this.password
             })
-            if (!response.success) {
+            if (!response.data.success) {
               this.emailOrPhoneError = "User with these credentials doesn't exist."
             } else {
-              console.log(response);
+              console.log("Successfully signed in");
             }
             } catch (error) {
               console.log(error);
