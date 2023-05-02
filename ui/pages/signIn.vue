@@ -1,4 +1,5 @@
 <template>
+  <EmailVerificationPopup :show="showPopUp" :email="$route.query.email" @close="showPopUp=false" />
   <div class="flex-col items-center md:flex md:flex-row md:w-full md:h-full ">
     <img src="./../assets/Logo-mobile.svg" class="block mt-10 md:hidden w-[150px] h-[42px] m-auto" />
     <WelcomeBanner />
@@ -41,9 +42,14 @@ export default {
             isHidden: true,
             inputValue: '',
             password: '',
+            showPopUp: false,
         };
     },
-    created() {
+    mounted() {
+      if (this.$route.query.registered === 'true') {
+        console.log("hi")
+        this.showPopUp = true;
+      }
     },
     methods: ({
         async onSubmit() {

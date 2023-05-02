@@ -66,8 +66,9 @@
               formData: this.form
             }) 
             console.log(response);
+            console.log(this.form.email);
             if (response.data.success) {
-              this.$router.push('/signIn');
+              this.$router.push({path: '/signIn', query: {registered: 'true', email: this.form.email}});
             } else {
               console.log("Some error occurred");
             }
