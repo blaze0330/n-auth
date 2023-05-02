@@ -1,7 +1,7 @@
 <template>
   <EmailVerificationPopup :show="showPopUp" :email="$route.query.email" @close="showPopUp=false" />
-  <div class="flex-col items-center md:flex md:flex-row md:w-full md:h-full ">
-    <img src="./../assets/Logo-mobile.svg" class="block mt-10 md:hidden w-[150px] h-[42px] m-auto" />
+  <div class="flex-col items-center h-[100vh] pt-10 md:flex md:flex-row md:w-full md:h-full">
+    <img src="./../assets/Logo-mobile.svg" class="block md:hidden w-[150px] h-[42px] m-auto" />
     <WelcomeBanner />
     <div class="mt-9 md:flex md:align-middle md:items-center md:basis-[60vw] bg-[#FFFFFF]">
       <div class="m-auto w-[384px] flex-col">

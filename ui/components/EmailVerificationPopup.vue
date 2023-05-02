@@ -1,6 +1,6 @@
 <template>
-  <div v-if="show" class="w-[100vw] h-[100vh] bg-[rgba(0,0,0,0.5)] z-10 absolute flex items-center justify-center">
-    <div class="w-[486px] h-[252px] bg-white rounded-[8px] text-[#404555]">
+  <div v-if="show" class="w-[100vw] h-[100vh] bg-[rgba(0,0,0,0.5)] z-10 absolute flex items-center justify-center sm:pt-[30px]">
+    <div class="w-[85%] h-[350px] md:w-[486px] md:h-[252px] bg-white rounded-[8px] text-[#404555]">
       <div class="flex justify-between p-[24px] pb-[16px]">
         <div class="text-[24px] font-semibold">
           Verify Email
