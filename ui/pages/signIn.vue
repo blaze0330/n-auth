@@ -1,5 +1,5 @@
 <template>
-  <EmailVerificationPopup :show="showPopUp" :email="$route.query.email" @close="showPopUp=false" />
+  <EmailVerificationPopup :show="showPopUp" :email="this.email" @close="showPopUp=false" />
   <div class="flex-col items-center h-[100vh] pt-10 md:pt-0 md:flex md:flex-row md:w-full md:h-full">
     <img src="./../assets/Logo-mobile.svg" class="block md:hidden w-[150px] h-[42px] m-auto" />
     <WelcomeBanner />
@@ -46,11 +46,13 @@ export default {
             showPopUp: false,
             emailOrPhoneError: '',
             isFormInvalid: true,
+            email: '', // store the email for verificaiton
         };
     },
     mounted() {
       if (this.$route.query.registered === 'true') {
-        console.log("hi")
+        console.log("hi");
+        this.email = this.$route.query.email;
         this.showPopUp = true;
       }
     },
